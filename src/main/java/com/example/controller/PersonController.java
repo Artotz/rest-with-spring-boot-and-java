@@ -23,30 +23,30 @@ public class PersonController {
 	PersonService service;
 	
 	@GetMapping(
-		produces={"application/json", "application/xml"})
+		produces={"application/json"})
 	public List<Person> findAll() {
 		return service.findAll();
 	}
 
 	@GetMapping(
 		path="/{id}",
-		produces={"application/json", "application/xml"}
+		produces={"application/json"}
 	)
 	public Person findById(@PathVariable(value="id") Long id){
 		return service.findById(id);
 	}
 
 	@PostMapping(
-		consumes={"application/json", "application/xml"},
-		produces={"application/json", "application/xml"}
+		consumes={"application/json"},
+		produces={"application/json"}
 	)
 	public Person create(@RequestBody Person person){
 		return service.create(person);
 	}
 
 	@PutMapping(
-		consumes={"application/json", "application/xml"},
-		produces={"application/json", "application/xml"}
+		consumes={"application/json"},
+		produces={"application/json"}
 	)
 	public Person update(@RequestBody Person person){
 		return service.update(person);

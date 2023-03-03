@@ -20,13 +20,13 @@ public class PersonService {
 	PersonRepository repository;
 	
 	public List<Person> findAll() {
-		logger.info("findAll");
+		logger.info("Executando findAll");
 
 		return repository.findAll();
 	}
 
 	public Person findById(Long id){
-		logger.info("FindById");
+		logger.info("Executando findById");
 
 		var entity = repository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
@@ -35,13 +35,13 @@ public class PersonService {
 	}
 
 	public Person create(Person person){
-		logger.info("create");
+		logger.info("Executando create");
 
 		return repository.save(person);
 	}
 
 	public Person update(Person person){	
-		logger.info("update");
+		logger.info("Executando update");
 	
 		if (person == null) throw new RequiredObjectIsNullException();
 
@@ -56,7 +56,7 @@ public class PersonService {
 	}
 
 	public void delete(Long id){
-		logger.info("delete");
+		logger.info("Executando delete");
 
 		var entity = repository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
