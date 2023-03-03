@@ -2,16 +2,34 @@ package com.example.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "person")
 public class Person implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	private String firstName;
-	private String lastName;
-	private String address;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
+	@Column(name = "first_name", nullable = false, length = 80)
+	private String firstName;
+
+	@Column(name = "last_name", nullable = false, length = 80)
+	private String lastName;
+	
+	@Column(nullable = false, length = 100)
+	private String address;
+
+	public Long getId() {
+		return id;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -20,6 +38,10 @@ public class Person implements Serializable{
 	}
 	public String getAddress() {
 		return address;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -30,14 +52,15 @@ public class Person implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		return result;
 	}
 	@Override
@@ -49,10 +72,10 @@ public class Person implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		if (address == null) {
-			if (other.address != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!address.equals(other.address))
+		} else if (!id.equals(other.id))
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -64,9 +87,14 @@ public class Person implements Serializable{
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
 		return true;
 	}
-	
+
 	
 	
 }
